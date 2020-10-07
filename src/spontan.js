@@ -15,7 +15,7 @@ export class Spontan {
     })
     this.peerOffering.on('signal', signal => {
       if (signal.type === 'offer') {
-        this.offer = JSON.stringify(signal)
+        this.offer = signal
       }
       console.log('Offering signal', this.offer)
     })
