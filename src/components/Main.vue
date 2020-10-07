@@ -1,19 +1,28 @@
 <template>
   <div>
-    Page
+    {{ spontan }}
+    <textarea name="offer" cols="30" rows="10"></textarea>
   </div>
 </template>
 
-<style lang="scss"></style>
+<style>
+
+
+</style>
 
 <script>
+import { spontan } from '../spontan.js'
+
 export default {
   name: 'Main',
   data() {
-    return {}
+    return {
+      spontan,
+    }
   },
   methods: {},
   async mounted() {
+
   },
 }
 </script>
