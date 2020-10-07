@@ -8,9 +8,10 @@
       <a :href="urlBase64">length={{ urlBase64.length }}</a>
     </p>
     <p class="qrcode" v-html="qrcode">QRCode</p>
-    <p>
+    <div>
+      <button @click="doQRCodeScan">Open QRCode Scanner</button>
       <video autoplay></video>
-    </p>
+    </div>
   </div>
 </template>
 
@@ -56,22 +57,20 @@ export default {
       })
     },
   },
-  methods: {},
-  async mounted() {
-
-    setTimeout(() => {
+  methods: {
+    doQRCodeScan() {
       //To check the device and add iOS support
       window.iOS = ['iPad', 'iPhone', 'iPod'].indexOf(navigator.platform) >= 0
       window.isMediaStreamAPISupported = navigator && navigator.mediaDevices && 'enumerateDevices' in navigator.mediaDevices
       window.noCameraPermission = false
 
       QRReader.init()
-      setTimeout(() => {
-        if (window.isMediaStreamAPISupported) {
-          scan()
-        }
-      }, 1000)
-
+      // setTimeout(() => {
+      if (window.isMediaStreamAPISupported) {
+        scan()
+      }
+      // }, 1000)
+  
       //Scan
       function scan(forSelectedPhotos = false) {
         QRReader.scan(result => {
@@ -80,7 +79,10 @@ export default {
           // if (forSelectedPhotos && frame) frame.remove();
         }, forSelectedPhotos)
       }
-    }, 1000)
+    },
+  },
+  async mounted() {
+
   },
 }
 </script>

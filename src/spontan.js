@@ -15,6 +15,7 @@ export class Spontan {
       // iceTransportPolicy: 'all',
       iceServers: [{
         urls: 'stun:turn01.brie.fi:5349',
+        // https://gist.github.com/mondain/b0ec1cf5f60ae726202e
       }]
     })
     this.peerOffering.on('signal', signal => {
