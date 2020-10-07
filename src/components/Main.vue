@@ -35,14 +35,17 @@ export default {
     }
   },
   computed: {
+    sdp() {
+      return this.spontan?.offer?.sdp || ''
+    },
     url() {
-      return '#' + encodeURIComponent(this.spontan.offer.sdp)
+      return '#' + encodeURIComponent(this.sdp)
     },
     urlBase64() {
-      return '#' + encodeURIComponent(btoa(this.spontan.offer.sdp))
+      return '#' + encodeURIComponent(btoa(this.sdp))
     },
     qrcode() {
-      let value = this.spontan.offer.sdp
+      let value = this.sdp
       const typeNumber = 0
       const errorCorrectionLevel = 'H'
       const qr = qrcode(typeNumber, errorCorrectionLevel)

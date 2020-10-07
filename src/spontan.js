@@ -12,6 +12,10 @@ export class Spontan {
     this.peerOffering = new Peer({
       initiator: true,
       trickle: false,
+      // iceTransportPolicy: 'all',
+      iceServers: [{
+        urls: 'stun:turn01.brie.fi:5349',
+      }]
     })
     this.peerOffering.on('signal', signal => {
       if (signal.type === 'offer') {
