@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "x": "ssh -R 8080:localhost:8080 signal",
+    "x:localhost": "ssh -R 80:localhost:8080 ssh.localhost.run",
+    "x:lt": "lt --port 8080",
+    "x:ngrok": "ngrok http 8080"
   },
   "dependencies": {
     "core-js": "^3.6.5",

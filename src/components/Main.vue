@@ -1,6 +1,15 @@
 <template>
   <div>
-    <textarea name="offer" cols="30" rows="10">{{ spontan.offer }}</textarea>
+    <h1>{{ spontan.name }}</h1>
+    <h3>Offer</h3>
+    <p>
+      <textarea cols="30" rows="10">{{ spontan.offer }}</textarea>
+    </p>
+    <h3>Answer</h3>
+    <p>
+      <textarea cols="30" rows="10" v-model="answer"></textarea>
+      <button @click="doConnect">Connect</button>
+    </p>
     <p>
       <a :href="url">length={{ url.length }}</a>
     </p>
@@ -8,16 +17,24 @@
       <a :href="urlBase64">length={{ urlBase64.length }}</a>
     </p>
     <p class="qrcode" v-html="qrcode">QRCode</p>
-    <div>
+    <p>
       <button @click="doQRCodeScan">Open QRCode Scanner</button>
-      <video autoplay></video>
-    </div>
+      <video autoplay v-show="receiveQR"></video>
+    </p>
   </div>
 </template>
 
 <style type="text/css">
 .qrcode svg {
   width: 20rem;
+}
+video {
+  position: fixed;
+  border-radius: 1rem;
+  top: 2rem;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
 }
 </style>
 
@@ -33,6 +50,8 @@ export default {
   data() {
     return {
       spontan,
+      answer: 'Waiting',
+      receiveQR: false
     }
   },
   computed: {
@@ -58,7 +77,12 @@ export default {
     },
   },
   methods: {
+    doConnect() {
+
+    },
     doQRCodeScan() {
+      this.receiveQR = this
+
       //To check the device and add iOS support
       window.iOS = ['iPad', 'iPhone', 'iPod'].indexOf(navigator.platform) >= 0
       window.isMediaStreamAPISupported = navigator && navigator.mediaDevices && 'enumerateDevices' in navigator.mediaDevices
@@ -67,18 +91,15 @@ export default {
       QRReader.init()
       // setTimeout(() => {
       if (window.isMediaStreamAPISupported) {
-        scan()
-      }
-      // }, 1000)
-  
-      //Scan
-      function scan(forSelectedPhotos = false) {
         QRReader.scan(result => {
           console.log('Found QR Code:', result)
+          this.answer = result
           // const frame = document.querySelector('#frame')
           // if (forSelectedPhotos && frame) frame.remove();
-        }, forSelectedPhotos)
+          this.receiveQR = false
+        }, false)
       }
+      // }, 1000)
     },
   },
   async mounted() {
