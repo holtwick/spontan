@@ -1,8 +1,8 @@
 # spontan
 
-> German for "spontaneous"
-
 **Avoid using servers for WebRTC as much as possible**
+
+> Online Demo available at [spontan.holtwick.de](https://spontan.holtwick.de/)
 
 Even though WebRTC is labelled peer-to-peer (P2P) it is mostly not, because just the data transfer itself goes 
 from one client to the other without servers in the middle. Usually these servers are involved to establish the connection:
@@ -55,3 +55,6 @@ For camera access `https` is required. You may want to send your locally running
 npm run x:localhost
 ```
 
+---
+
+> "spontan" is German for "spontaneous"
