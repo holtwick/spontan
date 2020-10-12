@@ -25,10 +25,12 @@ The motivation is to reduce the attacking points on communication in endangered 
 
 ### Signaling
 
-- [ ] Exchange of SDP e.g. text file
-- [ ] Exchange of a link containing the SDP
+- [ ] Exchange via plain text or text file
+- [ ] Exchange via URL query
 - [ ] Exchange via QR codes
-- [ ] Exchange via audio   
+- [ ] Exchange via audio
+- [ ] Exchange via Bluetooth
+- [ ] Reconnect peers, if there exists a route via other peers 
 
 ### STUN
 
@@ -45,7 +47,7 @@ If you need it you'll need it. This cannot be replaced by a client side solution
 
 - Encrypting or securing the connections and data transfer is out of scope of this project. Although for a full solution this is an absolute requirement.
 
-- Video and other data transfer details are also not handled by this project. They build on top of an established connection. 
+- Video and other data transfer details are not covered by this project. They build on top of an established connection. 
 
 ## Testing
 

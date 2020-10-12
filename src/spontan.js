@@ -1,23 +1,53 @@
 import Peer from 'simple-peer'
 import { generateName } from './names.js'
 
+const opts = {
+  trickle: false,
+  // iceTransportPolicy: 'all',
+  iceServers: [{
+    urls: 'stun:turn01.brie.fi:5349',
+    // https://gist.github.com/mondain/b0ec1cf5f60ae726202e
+  }],
+}
+
 export class Spontan {
 
   name = generateName()
   peers = []
 
-  offer
-  peerOffering
+  message
 
   constructor() {
-    this.peerOffering = new Peer({
-      initiator: true,
-      trickle: false,
-      // iceTransportPolicy: 'all',
-      iceServers: [{
-        urls: 'stun:turn01.brie.fi:5349',
-        // https://gist.github.com/mondain/b0ec1cf5f60ae726202e
-      }],
+
+  }
+
+  startConnection(answer) {
+    let peer = new Peer({
+      ...opts,
+      initiator: answer == null,
+    })
+
+    if (answer) {
+      peer.signal(answer)
+    }
+
+    peer.on('signal', signal => {
+      this.message = signal
+      console.log('Offering signal', signal)
+    })
+
+    // setInterval(() => {
+    //   this.ping()
+    // }, 1000)
+  }
+
+  setOffer(offer) {
+    this.peerOffering = null
+
+    let peer = new Peer(opts)
+    peer.signal({
+      type: 'offer',
+      sdp: offer,
     })
     this.peerOffering.on('signal', signal => {
       if (signal.type === 'offer') {
@@ -26,14 +56,18 @@ export class Spontan {
       console.log('Offering signal', this.offer)
     })
 
-    setInterval(() => {
-      this.ping()
-    }, 1000)
+  }
+
+  addPeer(peer) {
+    this.peers.push(peer)
+    peer.on('data', data => {
+      console.log(data)
+    })
   }
 
   ping() {
     for (let peer of this.peers) {
-      peer.send('')
+      peer.send(this.name)
     }
   }
 

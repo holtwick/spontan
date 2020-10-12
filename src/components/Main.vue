@@ -3,11 +3,11 @@
     <h1>{{ spontan.name }}</h1>
     <h3>Offer</h3>
     <p>
-      <textarea cols="30" rows="10">{{ spontan.offer }}</textarea>
+      <textarea cols="30" rows="10" spellcheck="false">{{ spontan.offer }}</textarea>
     </p>
     <h3>Answer</h3>
     <p>
-      <textarea cols="30" rows="10" v-model="answer"></textarea>
+      <textarea cols="30" rows="10" v-model="answer" spellcheck="false"></textarea>
       <button @click="doConnect">Connect</button>
     </p>
     <p>
