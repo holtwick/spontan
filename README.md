@@ -28,7 +28,7 @@ The motivation is to reduce the attacking points on communication in endangered 
 - [ ] Exchange of SDP e.g. text file
 - [ ] Exchange of a link containing the SDP
 - [ ] Exchange via QR codes
-- [ ] Exchange via audio   
+- [ ] Exchange via audio (Examples for ultra-sonic: [1](https://github.com/quiet/quiet-js/), [2](https://charliegerard.dev/blog/ultrasonic-payments/))
 
 ### STUN
 
